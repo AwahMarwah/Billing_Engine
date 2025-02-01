@@ -9,11 +9,11 @@ type (
 	}
 
 	DeleteReqPath struct {
-		Id uint32 `binding:"required" uri:"id"`
+		Id int `binding:"required" uri:"id"`
 	}
 
 	DetailReqPath struct {
-		Id uint32 `binding:"required" uri:"id"`
+		Id int `binding:"required" uri:"id"`
 	}
 
 	ListReqQuery struct {

@@ -7,4 +7,5 @@ const (
 	UnexpectedNewline           = "unexpected newline"
 	ProductCategoryAlreadyExist = "product category already exist"
 	BorrowerNotFound            = "borrower not found"
+	LoanNotFound                = "loan not found"
 )

@@ -1,9 +1,9 @@
-DROP TABLE Borrowers;
+DROP TABLE borrowers;
 
-DROP TABLE Loans;
+DROP TABLE loans;
 
-DROP TABLE Repayments;
+DROP TABLE repayments;
 
-DROP TABLE PaymentHistories;
+DROP TABLE payment_histories;
 
-DROP TABLE Delinquencies;
+DROP TABLE delinquencies;

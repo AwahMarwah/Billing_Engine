@@ -1,4 +1,4 @@
-CREATE TABLE Borrowers (
+CREATE TABLE borrowers (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255),
@@ -8,7 +8,7 @@ CREATE TABLE Borrowers (
     updated_at TIMESTAMP
 );
 
-CREATE TABLE Loans (
+CREATE TABLE loans (
     id SERIAL PRIMARY KEY,
     borrower_id INT NOT NULL,
     principal_amount DECIMAL(12, 2) NOT NULL,
@@ -17,10 +17,14 @@ CREATE TABLE Loans (
     total_amount_due DECIMAL(12, 2) NOT NULL,
     outstanding_balance DECIMAL(12, 2) NOT NULL,
     status VARCHAR(50) CHECK (status IN ('Active', 'Closed')) NOT NULL,
+    is_delinquent bool DEFAULT false,
+    start_loan_date TIMESTAMP,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP,
     FOREIGN KEY (borrower_id) REFERENCES Borrowers(id)
 );
 
-CREATE TABLE Repayments (
+CREATE TABLE repayments (
     id SERIAL PRIMARY KEY,
     loan_id INT NOT NULL,
     payment_date DATE NOT NULL,
@@ -30,7 +34,7 @@ CREATE TABLE Repayments (
     FOREIGN KEY (loan_id) REFERENCES Loans(id)
 );
 
-CREATE TABLE PaymentHistories (
+CREATE TABLE payment_histories (
     id SERIAL PRIMARY KEY,
     repayment_id INT NOT NULL,
     payment_date DATE NOT NULL,
@@ -39,7 +43,7 @@ CREATE TABLE PaymentHistories (
     FOREIGN KEY (repayment_id) REFERENCES Repayments(id)
 );
 
-CREATE TABLE Delinquencies(
+CREATE TABLE delinquencies(
     delinquency_id SERIAL PRIMARY KEY,
     loan_id INT NOT NULL,
     delinquent BOOLEAN NOT NULL,

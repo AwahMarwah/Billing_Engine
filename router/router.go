@@ -3,6 +3,7 @@ package router
 import (
 	"billing_engine/controller/borrower"
 	"billing_engine/controller/health"
+	"billing_engine/controller/loan"
 	"billing_engine/database"
 	"github.com/gin-contrib/cors"
 
@@ -21,6 +22,14 @@ func Run(db database.DB) (err error) {
 		borrowerGroup.POST("", borrowerController.Create)
 		borrowerGroup.GET("/:id", borrowerController.Detail)
 		borrowerGroup.DELETE("/:id", borrowerController.Delete)
+	}
+	loanGroup := router.Group("loan")
+	{
+		loanController := loan.NewController(db.GormDb)
+		loanGroup.GET("", loanController.List)
+		loanGroup.POST("", loanController.Create)
+		loanGroup.GET(":id", loanController.Detail)
+		loanGroup.DELETE(":id", loanController.Delete)
 	}
 	return router.Run()
 }

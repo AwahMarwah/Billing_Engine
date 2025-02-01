@@ -3,7 +3,7 @@ package borrower
 import "time"
 
 type Borrower struct {
-	Id          uint32
+	Id          int
 	Name        string
 	Email       string
 	PhoneNumber string
