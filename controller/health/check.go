@@ -2,7 +2,7 @@ package health
 
 import (
 	"billing_engine/common"
-	"billing_engine/lib/response"
+	"billing_engine/library/response"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
