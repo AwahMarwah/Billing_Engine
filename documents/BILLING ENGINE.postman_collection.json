@@ -1,0 +1,335 @@
+{
+	"info": {
+		"_postman_id": "b63c3008-7c82-4582-8bf2-241bf7f95b4f",
+		"name": "BILLING ENGINE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21787193"
+	},
+	"item": [
+		{
+			"name": "borrower",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"asep\",\n    \"phone_number\": \"087725242628\",\n    \"address\": \"jl. Jakarta\",\n    \"email\": \"asep@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/borrower",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"borrower"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/borrower?page=1&limit=10",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"borrower"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/borrower/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"borrower",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/borrower/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"borrower",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "loan",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"borrower_id\" : 1,\n    \"principal_amount\": 5000000,\n    \"interest_rate\": 10,\n    \"loan_duration_weeks\": 50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/loan",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"loan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/loan?page=1&limit=2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"loan"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/loan/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"loan",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var template = `",
+									"<style type=\"text/css\">",
+									"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}",
+									"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}",
+									"    .tftable tr {background-color:#ffffff;}",
+									"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}",
+									"    .tftable tr:hover {background-color:#e0ffff;}",
+									"</style>",
+									"",
+									"<table class=\"tftable\" border=\"1\">",
+									"    <tr>",
+									"        <th>Data</th>",
+									"        <th>Message</th>",
+									"    </tr>",
+									"    <tr>",
+									"        <td>{{response.data}}</td>",
+									"        <td>{{response.message}}</td>",
+									"    </tr>",
+									"</table>",
+									"`;",
+									"",
+									"function constructVisualizerPayload() {",
+									"    return { response: pm.response.json() }",
+									"}",
+									"",
+									"pm.visualizer.set(template, constructVisualizerPayload());"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/loan/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"loan",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "billing",
+			"item": [
+				{
+					"name": "Check Deliquency",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/billing/deliquencies/check",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"billing",
+								"deliquencies",
+								"check"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Outstanding Balance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/billing/outstanding/:loan_id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"billing",
+								"outstanding",
+								":loan_id"
+							],
+							"variable": [
+								{
+									"key": "loan_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Make Payment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"loan_id\": 1,\n    \"amount_paid\": 110000,\n    \"week_number\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/billing/payment",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"billing",
+								"payment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
