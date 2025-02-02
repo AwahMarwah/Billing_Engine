@@ -12,6 +12,7 @@ type (
 		Delete(reqPath *loanModel.DeleteReqPath) (err error)
 		List(reqQuery *loanModel.ListReqQuery) (resData []loanModel.ListResData, count int64, err error)
 		Take(selectParams []string, conditions *loanModel.Loan) (loan loanModel.Loan, err error)
+		Update(id *int, values *map[string]any) (err error)
 	}
 
 	repo struct {

@@ -16,6 +16,12 @@ func (s *service) Detail(reqPath *loanModel.DetailReqPath) (resData loanModel.De
 		}
 		return resData, http.StatusInternalServerError, err
 	}
+	schedule, err := s.billingRepo.ListBillingSchedule(&loan.Id)
+	if err != nil {
+		if err != nil {
+			return resData, http.StatusInternalServerError, err
+		}
+	}
 	resData.ID = loan.Id
 	resData.BorrowerID = loan.BorrowerId
 	resData.PrincipalAmount = loan.PrincipalAmount
@@ -27,5 +33,6 @@ func (s *service) Detail(reqPath *loanModel.DetailReqPath) (resData loanModel.De
 	resData.IsDelinquent = loan.IsDelinquent
 	resData.StartLoanDate = loan.StartLoanDate.Format("02 Jan 2006")
 	resData.CreatedAt = loan.CreatedAt.Format("02 Jan 2006")
+	resData.Schedule = schedule
 	return
 }

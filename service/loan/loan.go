@@ -2,6 +2,7 @@ package loan
 
 import (
 	loanModel "billing_engine/model/loan"
+	billingRepo "billing_engine/repository/billing"
 	borrowerRepo "billing_engine/repository/borrower"
 	"billing_engine/repository/loan"
 )
@@ -17,12 +18,14 @@ type (
 	service struct {
 		loanRepo     loan.IRepo
 		borrowerRepo borrowerRepo.IRepo
+		billingRepo  billingRepo.IRepo
 	}
 )
 
-func NewService(loanRepo loan.IRepo, borrowerRepo borrowerRepo.IRepo) IService {
+func NewService(loanRepo loan.IRepo, borrowerRepo borrowerRepo.IRepo, billingRepo billingRepo.IRepo) IService {
 	return &service{
 		loanRepo:     loanRepo,
 		borrowerRepo: borrowerRepo,
+		billingRepo:  billingRepo,
 	}
 }

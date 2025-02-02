@@ -34,15 +34,6 @@ CREATE TABLE repayments (
     FOREIGN KEY (loan_id) REFERENCES Loans(id)
 );
 
-CREATE TABLE payment_histories (
-    id SERIAL PRIMARY KEY,
-    repayment_id INT NOT NULL,
-    payment_date DATE NOT NULL,
-    amount_paid DECIMAL(12, 2) NOT NULL,
-    status VARCHAR(50) CHECK (status IN ('Paid', 'Missed')) NOT NULL,
-    FOREIGN KEY (repayment_id) REFERENCES Repayments(id)
-);
-
 CREATE TABLE delinquencies(
     delinquency_id SERIAL PRIMARY KEY,
     loan_id INT NOT NULL,

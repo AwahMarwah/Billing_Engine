@@ -1,6 +1,7 @@
 package loan
 
 import (
+	"billing_engine/repository/billing"
 	borrowerRepo "billing_engine/repository/borrower"
 	loanRepo "billing_engine/repository/loan"
 	"billing_engine/service/loan"
@@ -12,5 +13,5 @@ type controller struct {
 }
 
 func NewController(db *gorm.DB) *controller {
-	return &controller{loanService: loan.NewService(loanRepo.NewRepo(db), borrowerRepo.NewRepo(db))}
+	return &controller{loanService: loan.NewService(loanRepo.NewRepo(db), borrowerRepo.NewRepo(db), billing.NewRepo(db))}
 }

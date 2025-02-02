@@ -1,6 +1,7 @@
 package router
 
 import (
+	"billing_engine/controller/billing"
 	"billing_engine/controller/borrower"
 	"billing_engine/controller/health"
 	"billing_engine/controller/loan"
@@ -15,6 +16,13 @@ func Run(db database.DB) (err error) {
 	router.Use(cors.New(corsConfig))
 	healthController := health.NewController(db.SqlDb)
 	router.GET("health", healthController.Check)
+	billingGroup := router.Group("billing")
+	{
+		billingController := billing.NewController(db.GormDb)
+		billingGroup.GET("outstanding/:loan_id", billingController.GetOutstanding)
+		billingGroup.GET("deliquencies/check", billingController.CheckDeliquencies)
+		billingGroup.POST("payment", billingController.MakePayment)
+	}
 	borrowerGroup := router.Group("borrower")
 	{
 		borrowerController := borrower.NewController(db.GormDb)

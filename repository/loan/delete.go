@@ -11,12 +11,12 @@ func (r *repo) Delete(reqPath *loanModel.DeleteReqPath) (err error) {
 		return tx.Error
 	}
 
-	if err = tx.Debug().Where("loan_id = ?", reqPath.Id).Delete(&billingModel.BillingSchedule{}).Error; err != nil {
+	if err = tx.Where("loan_id = ?", reqPath.Id).Delete(&billingModel.BillingSchedule{}).Error; err != nil {
 		tx.Rollback()
 		return err
 	}
 
-	if err = tx.Debug().Model(loanModel.Loan{}).Delete(&loanModel.Loan{Id: reqPath.Id}).Error; err != nil {
+	if err = tx.Model(loanModel.Loan{}).Delete(&loanModel.Loan{Id: reqPath.Id}).Error; err != nil {
 		tx.Rollback()
 		return err
 	}

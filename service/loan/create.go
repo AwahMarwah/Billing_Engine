@@ -21,12 +21,7 @@ func (s *service) Create(reqBody *loanModel.CreateReqBody) (statusCode int, err 
 		return http.StatusNotFound, fmt.Errorf("borrower not found")
 	}
 
-	// Validation for loan with borrower id
 	loan, err := s.loanRepo.Take([]string{"borrower_id"}, &loanModel.Loan{BorrowerId: reqBody.BorrowerID})
-	if err != nil {
-		return http.StatusInternalServerError, err
-	}
-
 	if loan.BorrowerId == borrower.Id {
 		return http.StatusBadRequest, fmt.Errorf("borrower id: %d already take loans", reqBody.BorrowerID)
 	}
